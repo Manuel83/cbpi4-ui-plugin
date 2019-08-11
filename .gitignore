@@ -1,0 +1,5 @@
+*.pyc
+build
+dist
+cbpi4-ui-plugin/src/node_modules/
+.idea
