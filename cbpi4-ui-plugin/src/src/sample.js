@@ -1,17 +1,19 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {CardTable} from "reactstrap";
+import {Sparklines, SparklinesLine} from 'react-sparklines';
 
 @connect((state, ownProps) => {
     return {
-        data: state.sensor.data
+        data: state.sensor.data,
+        d2: state.sensor.d2,
+        sensors: state.sensor.list
     }
 }, (dispatch, ownProps) => {
     return {}
 }, null, {withRef: true})
 export default class Sample extends Component {
 
-    function
 
     getParams(location) {
 
@@ -22,18 +24,22 @@ export default class Sample extends Component {
     render() {
 
         let sensor_id = this.getParams(window.location)
-        console.log(sensor_id, this.props.data)
+        console.log(sensor_id, this.props.data, "D2", this.props.d2)
         if (sensor_id in this.props.data) {
             return (
-                <div className="data card" style={{fontSize :"20px"}}>{this.props.data[sensor_id]} </div>
+                <div className="data card">
+                    <div className="sensor">{this.props.sensors[sensor_id].name} </div>
+                    <div>{this.props.data[sensor_id]} °C</div>
+                    <Sparklines data={this.props.d2}>
+                        <SparklinesLine color="#cdcdcd"/>
+                    </Sparklines>
+                </div>
             )
-        }
-        else {
+        } else {
             return (
-                <div className="data card" style={{fontSize:"20px"}}>Waiting for Data... <div> Sensor Id {sensor_id} </div></div>
+                <div className="data card" style={{fontSize: "20px"}}>Waiting for Data... <div> Sensor Id {sensor_id} </div></div>
             )
         }
-
 
     }
 }
