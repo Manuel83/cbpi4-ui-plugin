@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {CardTable} from "reactstrap";
+
 import {Sparklines, SparklinesLine} from 'react-sparklines';
 
 @connect((state, ownProps) => {
@@ -30,7 +30,7 @@ export default class Sample extends Component {
                 <div className="data card">
                     <div className="sensor">{this.props.sensors[sensor_id].name} </div>
                     <div>{this.props.data[sensor_id]} °C</div>
-                    <Sparklines data={this.props.d2}>
+                    <Sparklines data={this.props.sensors[sensor_id].history}>
                         <SparklinesLine color="#cdcdcd"/>
                     </Sparklines>
                 </div>
