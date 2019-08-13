@@ -28,7 +28,7 @@ export default class Sample extends Component {
         if (sensor_id in this.props.data) {
             return (
                 <div className="data card">
-                    <div className="sensor">{this.props.sensors[sensor_id].name} </div>
+                    <div>{this.props.sensors[sensor_id].name} </div>
                     <div>{this.props.data[sensor_id]} °C</div>
                     <Sparklines data={this.props.sensors[sensor_id].history}>
                         <SparklinesLine color="#cdcdcd"/>
